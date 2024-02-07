@@ -1,13 +1,17 @@
 package shop.mtcoding.blog.board;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+@RequiredArgsConstructor
 @Controller
 public class BoardController {
+
+    private final BoardRepository boardRepository ;
+
 
     @GetMapping("/")
     public String index() {
@@ -25,7 +29,10 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(){
+    public String save(BoardRequest.saveDTO requestDTO){
+
+        boardRepository.save(requestDTO);
+
         return "redirect:/";
     }
 
