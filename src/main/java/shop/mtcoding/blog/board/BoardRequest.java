@@ -10,7 +10,14 @@ public class BoardRequest {
         private String title ;
         private String content ;
 
+    }
+    @Data
+    public static class saveAgainDTO{
+        private String author ;
+        private String title ;
+        private String content ;
 
     }
+
 
 }
