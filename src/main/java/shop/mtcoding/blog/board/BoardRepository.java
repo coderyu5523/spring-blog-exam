@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class BoardRepository {
@@ -19,6 +21,15 @@ public class BoardRepository {
         query.setParameter(2,requestDTO.getTitle());
         query.setParameter(3,requestDTO.getContent());
         query.executeUpdate();
+    }
 
+    public List<Board> findAll(int page) {
+        final int COUNT = 3;
+        int value = page * COUNT ;
+        Query query = em.createNativeQuery("select * from board_tb order by id desc limit ?,?",Board.class);
+        query.setParameter(1,value);
+        query.setParameter(2,COUNT);
+        List<Board> boardList = query.getResultList();
+        return boardList;
     }
 }
