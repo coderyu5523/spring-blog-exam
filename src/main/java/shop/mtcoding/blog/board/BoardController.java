@@ -22,6 +22,22 @@ public class BoardController {
         List<Board> boardList = boardRepository.findAll(page);
         request.setAttribute("boardList",boardList);
 
+        int currentPage = page ;
+        int nextPage = currentPage +1;
+        int prevPage = currentPage -1;
+
+        request.setAttribute("nextPage",nextPage);
+        request.setAttribute("prevPage",prevPage);
+
+        boolean first = (currentPage == 0 ? true : false);
+
+        int totalPage = 21;
+        int totalCount = totalPage/5;
+        boolean last = (currentPage == totalCount? true : false);
+
+        request.setAttribute("first", first);
+        request.setAttribute("last", last);
+
 
         return "index";
     }

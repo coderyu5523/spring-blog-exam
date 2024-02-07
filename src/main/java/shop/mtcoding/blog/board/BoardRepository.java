@@ -24,7 +24,7 @@ public class BoardRepository {
     }
 
     public List<Board> findAll(int page) {
-        final int COUNT = 3;
+        final int COUNT = 5;
         int value = page * COUNT ;
         Query query = em.createNativeQuery("select * from board_tb order by id desc limit ?,?",Board.class);
         query.setParameter(1,value);
