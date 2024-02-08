@@ -60,11 +60,11 @@ public class BoardRepository {
 
     }
 
-    public BigInteger count(){
+    public int count() {
         Query query = em.createNativeQuery("select count(*) from board_tb");
-        BigInteger count = (BigInteger) query.getSingleResult();
-        return count ;
+
+        Long count = (Long) query.getSingleResult();
+            return count.intValue();
 
     }
-
 }

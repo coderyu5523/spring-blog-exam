@@ -33,8 +33,7 @@ public class BoardController {
         boolean first = (currentPage == 0 ? true : false);
         request.setAttribute("first", first);
 
-        int totalPage= 15;
-
+        int totalPage= boardRepository.count();
         int totalCount = totalPage / 5;
         boolean last = (currentPage == totalCount ? true : false);
 
