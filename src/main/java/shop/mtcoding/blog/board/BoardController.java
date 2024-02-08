@@ -31,13 +31,12 @@ public class BoardController {
         request.setAttribute("prevPage", prevPage);
 
         boolean first = (currentPage == 0 ? true : false);
+        request.setAttribute("first", first);
 
-        int totalPage = 21;
+        int totalPage= 21 ;
+
         int totalCount = totalPage / 5;
         boolean last = (currentPage == totalCount ? true : false);
-
-        request.setAttribute("first", first);
-        request.setAttribute("last", last);
 
 
         List<Integer> numberList = new ArrayList<>();
@@ -56,6 +55,9 @@ public class BoardController {
             }
 
         }
+
+
+        request.setAttribute("last", last);
 
 
 
