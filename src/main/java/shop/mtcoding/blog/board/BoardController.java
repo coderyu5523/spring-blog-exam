@@ -78,8 +78,19 @@ public class BoardController {
     }
 
     @PostMapping("/board/{id}/update")
-    public String update(@PathVariable int id,BoardRequest.saveAgainDTO requestDTO){
+    public String update(@PathVariable int id,BoardRequest.saveAgainDTO requestDTO,HttpServletRequest request){
 
+        if(requestDTO.getTitle().length()>20){
+            request.setAttribute("status",400);
+            request.setAttribute("msg","제목은 20자를 넘을 수 없습니다.");
+            return "error/40x";
+        }
+
+        if(requestDTO.getContent().length()>20){
+            request.setAttribute("status",400);
+            request.setAttribute("msg","내용은 20자를 넘을 수 없습니다.");
+            return "error/40x";
+        }
         boardRepository.update(requestDTO,id);
 
         return "redirect:/";
