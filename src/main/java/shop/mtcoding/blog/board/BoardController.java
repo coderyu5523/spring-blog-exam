@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -20,28 +21,48 @@ public class BoardController {
     @GetMapping("/")
     public String index(HttpServletRequest request,@RequestParam(defaultValue = "0")int page) {
         List<Board> boardList = boardRepository.findAll(page);
-        request.setAttribute("boardList",boardList);
+        request.setAttribute("boardList", boardList);
 
-        int currentPage = page ;
-        int nextPage = currentPage +1;
-        int prevPage = currentPage -1;
+        int currentPage = page;
+        int nextPage = currentPage + 1;
+        int prevPage = currentPage - 1;
 
-        request.setAttribute("nextPage",nextPage);
-        request.setAttribute("prevPage",prevPage);
+        request.setAttribute("nextPage", nextPage);
+        request.setAttribute("prevPage", prevPage);
 
         boolean first = (currentPage == 0 ? true : false);
 
         int totalPage = 21;
-        int totalCount = totalPage/5;
-        boolean last = (currentPage == totalCount? true : false);
+        int totalCount = totalPage / 5;
+        boolean last = (currentPage == totalCount ? true : false);
 
         request.setAttribute("first", first);
         request.setAttribute("last", last);
 
 
-        return "index";
-    }
+        List<Integer> numberList = new ArrayList<>();
 
+        if(totalPage%5==0){
+            currentPage = totalCount  ;
+            for(int i=1;i<=currentPage;i++){
+              numberList.add(i);
+              request.setAttribute("numberList",numberList);
+            }
+        }else if(totalPage%5!=0){
+            currentPage = totalCount +1;
+            for(int i=1;i<=currentPage;i++){
+                numberList.add(i);
+                request.setAttribute("numberList",numberList);
+            }
+
+        }
+
+
+
+
+        return "index";
+
+    }
     @GetMapping("/board/saveForm")
     public String saveForm() {
         return "board/saveForm";
@@ -102,4 +123,6 @@ public class BoardController {
         boardRepository.delete(id);
         return "redirect:/";
     }
+
+
 }
