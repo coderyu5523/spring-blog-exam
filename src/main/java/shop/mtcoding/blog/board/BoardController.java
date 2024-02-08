@@ -33,23 +33,23 @@ public class BoardController {
         boolean first = (currentPage == 0 ? true : false);
         request.setAttribute("first", first);
 
-        int totalPage= 21 ;
+        int totalPage= 15;
 
         int totalCount = totalPage / 5;
         boolean last = (currentPage == totalCount ? true : false);
 
 
         List<Integer> numberList = new ArrayList<>();
-
+        int allPage;
         if(totalPage%5==0){
-            currentPage = totalCount  ;
-            for(int i=1;i<=currentPage;i++){
+            allPage = totalCount  ;
+            for(int i=1;i<=allPage;i++){
               numberList.add(i);
               request.setAttribute("numberList",numberList);
             }
         }else if(totalPage%5!=0){
-            currentPage = totalCount +1;
-            for(int i=1;i<=currentPage;i++){
+            allPage = totalCount +1;
+            for(int i=1;i<=allPage;i++){
                 numberList.add(i);
                 request.setAttribute("numberList",numberList);
             }
