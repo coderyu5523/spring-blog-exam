@@ -14,6 +14,8 @@ public class BoardRepository {
 
 
     private final EntityManager em;
+
+
     @Transactional
     public void save(BoardRequest.saveDTO requestDTO) {
         Query query = em.createNativeQuery("insert into board_tb(author,title,content) values (?,?,?)");
